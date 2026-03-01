@@ -1,5 +1,17 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
-import { Container, Table, Button, Modal, Form, InputGroup } from "react-bootstrap";
+import {
+  Container,
+  Table,
+  Button,
+  Modal,
+  Form,
+  InputGroup,
+  Badge,
+  Card,
+  Row,
+  Col,
+} from "react-bootstrap";
 import { FaEdit, FaSyncAlt, FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import {
@@ -12,16 +24,16 @@ import { toast } from "react-toastify";
 
 const CategoryManagement = () => {
   const [categories, setCategories] = useState([]);
-  const [filteredCategories, setFilteredCategories] = useState([]); 
+  const [filteredCategories, setFilteredCategories] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [showEditModal, setShowEditModal] = useState(false); 
-  const [showStatusModal, setShowStatusModal] = useState(false); 
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showStatusModal, setShowStatusModal] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [currentCategory, setCurrentCategory] = useState({
     name: "",
     gender: "",
   });
-  const [currentStatus, setCurrentStatus] = useState("active"); 
+  const [currentStatus, setCurrentStatus] = useState("active");
   const [categoryId, setCategoryId] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
@@ -39,9 +51,9 @@ const CategoryManagement = () => {
   const fetchAllCategories = async () => {
     setLoading(true);
     try {
-      const categoryData = await fetchCategories(navigate);
-      setCategories(categoryData);
-      setFilteredCategories(categoryData);
+      const data = await fetchCategories();
+      setCategories(Array.isArray(data) ? data : []);
+      setFilteredCategories(Array.isArray(data) ? data : []);
     } catch (error) {
       toast.error(error.message);
     } finally {
@@ -49,30 +61,51 @@ const CategoryManagement = () => {
     }
   };
 
-  const handleSearch = () => {
+  useEffect(() => {
     const query = searchQuery.toLowerCase().trim();
     if (!query) {
-      setFilteredCategories(categories); 
-      return;
+      setFilteredCategories(categories);
+    } else {
+      setFilteredCategories(
+        categories.filter((c) =>
+          c.name.toLowerCase().includes(query)
+        )
+      );
     }
-
-    const filtered = categories.filter((category) =>
-      category.name.toLowerCase().includes(query)
-    );
-    setFilteredCategories(filtered);
-  };
-
-  const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);
-  };
-
-  useEffect(() => {
-    handleSearch();
   }, [searchQuery, categories]);
 
-  const handleResetSearch = () => {
-    setSearchQuery("");
-    setFilteredCategories(categories);
+  const handleSaveCategory = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      if (isEdit) {
+        await editCategory(categoryId, currentCategory);
+        toast.success("Category updated successfully!");
+      } else {
+        await createCategory(currentCategory);
+        toast.success("Category created successfully!");
+      }
+      await fetchAllCategories();
+      setShowEditModal(false);
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleUpdateStatus = async () => {
+    setLoading(true);
+    try {
+      await updateCategoryStatus(categoryId, currentStatus);
+      toast.success("Status updated successfully!");
+      await fetchAllCategories();
+      setShowStatusModal(false);
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleOpenEditModal = (category = null) => {
@@ -90,174 +123,110 @@ const CategoryManagement = () => {
     setShowEditModal(true);
   };
 
-  const handleCloseEditModal = () => {
-    setShowEditModal(false);
-    setCurrentCategory({ name: "", gender: "" });
-    setCategoryId(null);
-  };
-
   const handleOpenStatusModal = (category) => {
     setCategoryId(category._id);
     setCurrentStatus(category.status);
     setShowStatusModal(true);
   };
 
-  const handleCloseStatusModal = () => {
-    setShowStatusModal(false);
-    setCategoryId(null);
-    setCurrentStatus("active");
-  };
-
-  const handleSaveCategory = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      if (isEdit) {
-        const updatedCategory = await editCategory(
-          categoryId,
-          currentCategory
-        );
-        setCategories(
-          categories.map((cat) =>
-            cat._id === categoryId ? updatedCategory : cat
-          )
-        );
-        setFilteredCategories(
-          filteredCategories.map((cat) =>
-            cat._id === categoryId ? updatedCategory : cat
-          )
-        );
-        toast.success("Category updated successfully!");
-      } else {
-        const newCategory = await createCategory(currentCategory);
-        setCategories([...categories, newCategory]);
-        setFilteredCategories([...filteredCategories, newCategory]);
-        toast.success("Category created successfully!");
-      }
-      handleCloseEditModal();
-    } catch (error) {
-      toast.error(error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleUpdateStatus = async () => {
-    setLoading(true);
-    try {
-      const updatedCategory = await updateCategoryStatus(
-        categoryId,
-        currentStatus
-      );
-      setCategories(
-        categories.map((cat) => (cat._id === categoryId ? updatedCategory : cat))
-      );
-      setFilteredCategories(
-        filteredCategories.map((cat) =>
-          cat._id === categoryId ? updatedCategory : cat
-        )
-      );
-      toast.success(`Category status updated to ${currentStatus} successfully!`);
-      handleCloseStatusModal();
-    } catch (error) {
-      toast.error(error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
-    <Container className="mt-4">
-      <h2>Category Management</h2>
+    <div
 
-      <Form className="mb-4">
-        <InputGroup className="mb-3" style={{ maxWidth: "400px" }}>
-          <InputGroup.Text>
-            <FaSearch />
-          </InputGroup.Text>
-          <Form.Control
-            type="text"
-            placeholder="Search by category name..."
-            value={searchQuery}
-            onChange={handleSearchChange}
-          />
-          <Button
-            variant="secondary"
-            onClick={handleResetSearch}
-            disabled={loading || !searchQuery}
-          >
-            Reset
-          </Button>
-        </InputGroup>
-      </Form>
+    >
+      <Container>
+        <Card className="shadow-lg border-0 rounded-4 p-4">
+          <Row className="mb-4">
+            <Col>
+              <h2 className="fw-bold text-primary">
+                📂 Category Management
+              </h2>
+            </Col>
+            <Col className="text-end">
+              <Button
+                variant="primary"
+                className="shadow-sm"
+                onClick={() => handleOpenEditModal()}
+              >
+                ➕ Add Category
+              </Button>
+            </Col>
+          </Row>
 
-      <Button
-        variant="primary"
-        className="mb-3"
-        onClick={() => handleOpenEditModal()}
-        disabled={loading}
-      >
-        Add New Category
-      </Button>
+          <InputGroup className="mb-4 shadow-sm" style={{ maxWidth: "400px" }}>
+            <InputGroup.Text>
+              <FaSearch />
+            </InputGroup.Text>
+            <Form.Control
+              placeholder="Search category..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </InputGroup>
 
-      {loading ? (
-        <p>Loading...</p>
-      ) : filteredCategories.length > 0 ? (
-        <Table striped bordered hover responsive>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th style={{ width: 400 }}>Gender</th>
-              <th style={{ width: 400 }}>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredCategories.map((category) => (
-              <tr key={category._id}>
-                <td>{category.name}</td>
-                <td>{category.gender}</td>
-                <td>
-                  <span
-                    style={{
-                      color: category.status === "active" ? "green" : "orange",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    {category.status === "active" ? "Active" : "Inactive"}
-                  </span>
-                </td>
-                <td style={{ display: "flex", justifyContent: "space-around" }}>
-                  <Button
-                    variant="outline-primary"
-                    size="sm"
-                    className="me-2"
-                    onClick={() => handleOpenEditModal(category)}
-                    disabled={loading}
-                  >
-                    <FaEdit /> Edit
-                  </Button>
-                  <Button
-                    variant="outline-success"
-                    size="sm"
-                    onClick={() => handleOpenStatusModal(category)}
-                    disabled={loading}
-                  >
-                    <FaSyncAlt /> Update Status
-                  </Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-      ) : (
-        <p>No categories found.</p>
-      )}
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            <Table hover responsive className="align-middle">
+              <thead className="table-light">
+                <tr>
+                  <th>Name</th>
+                  <th>Gender</th>
+                  <th>Status</th>
+                  <th className="text-center">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredCategories.map((category) => (
+                  <tr key={category._id}>
+                    <td className="fw-semibold">{category.name}</td>
+                    <td>{category.gender}</td>
+                    <td>
+                      <Badge
+                        bg={
+                          category.status === "active"
+                            ? "success"
+                            : "warning"
+                        }
+                      >
+                        {category.status === "active"
+                          ? "Active"
+                          : "Inactive"}
+                      </Badge>
+                    </td>
+                    <td className="text-center">
+                      <Button
+                        variant="outline-primary"
+                        size="sm"
+                        className="me-2"
+                        onClick={() =>
+                          handleOpenEditModal(category)
+                        }
+                      >
+                        <FaEdit /> Edit
+                      </Button>
+                      <Button
+                        variant="outline-warning"
+                        size="sm"
+                        onClick={() =>
+                          handleOpenStatusModal(category)
+                        }
+                      >
+                        <FaSyncAlt /> Status
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          )}
+        </Card>
+      </Container>
 
-      <Modal show={showEditModal} onHide={handleCloseEditModal}>
-        <Modal.Header closeButton>
+      {/* Edit Modal */}
+      <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
+        <Modal.Header closeButton className="bg-primary text-white">
           <Modal.Title>
-            {isEdit ? "Edit Category" : "Add New Category"}
+            {isEdit ? "Edit Category" : "Add Category"}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -265,7 +234,6 @@ const CategoryManagement = () => {
             <Form.Group className="mb-3">
               <Form.Label>Name</Form.Label>
               <Form.Control
-                type="text"
                 value={currentCategory.name}
                 onChange={(e) =>
                   setCurrentCategory({
@@ -274,9 +242,9 @@ const CategoryManagement = () => {
                   })
                 }
                 required
-                disabled={loading}
               />
             </Form.Group>
+
             <Form.Group className="mb-3">
               <Form.Label>Gender</Form.Label>
               <Form.Select
@@ -288,48 +256,48 @@ const CategoryManagement = () => {
                   })
                 }
                 required
-                disabled={loading}
               >
                 <option value="">Select Gender</option>
                 <option value="Men">Men</option>
                 <option value="Women">Women</option>
               </Form.Select>
             </Form.Group>
-            <Button type="submit" variant="primary" disabled={loading}>
+
+            <Button type="submit" variant="primary">
               {isEdit ? "Update" : "Create"}
             </Button>
           </Form>
         </Modal.Body>
       </Modal>
 
-      <Modal show={showStatusModal} onHide={handleCloseStatusModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Update Category Status</Modal.Title>
+      {/* Status Modal */}
+      <Modal show={showStatusModal} onHide={() => setShowStatusModal(false)}>
+        <Modal.Header closeButton className="bg-warning">
+          <Modal.Title>Update Status</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group className="mb-3">
-              <Form.Label>Status</Form.Label>
-              <Form.Select
-                value={currentStatus}
-                onChange={(e) => setCurrentStatus(e.target.value)}
-                disabled={loading}
-              >
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
-              </Form.Select>
-            </Form.Group>
-            <Button
-              variant="primary"
-              onClick={handleUpdateStatus}
-              disabled={loading}
+            <Form.Select
+              value={currentStatus}
+              onChange={(e) =>
+                setCurrentStatus(e.target.value)
+              }
+              className="mb-3"
             >
-              Update Status
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+            </Form.Select>
+
+            <Button
+              variant="warning"
+              onClick={handleUpdateStatus}
+            >
+              Update
             </Button>
           </Form>
         </Modal.Body>
       </Modal>
-    </Container>
+    </div>
   );
 };
 

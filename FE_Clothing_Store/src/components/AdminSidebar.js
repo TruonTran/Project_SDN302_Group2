@@ -22,79 +22,61 @@ const AdminSidebar = () => {
     }
   };
 
+  const linkStyle = ({ isActive }) =>
+    `nav-link d-flex align-items-center p-2 mb-2 rounded-3 ${isActive
+      ? "bg-white text-dark fw-bold shadow"
+      : "text-white"
+    }`;
+
   return (
     <aside
-      className="bg-dark text-white p-3 vh-100 position-fixed d-flex flex-column"
-      style={{ width: "250px", left: 0, top: 0, bottom: 0 }}
+      className="text-white p-3 vh-100 position-fixed d-flex flex-column shadow-lg"
+      style={{
+        width: "250px",
+        left: 0,
+        top: 0,
+        bottom: 0,
+        background: "linear-gradient(180deg, #2b5876 0%, #4e4376 100%)",
+      }}
     >
-      <h4 className="text-center pb-3 border-bottom">Admin Panel</h4>
-      <ul className="list-unstyled flex-grow-1">
+      <h4 className="text-center pb-3 border-bottom border-light">
+        Admin Panel
+      </h4>
+
+      <ul className="list-unstyled flex-grow-1 mt-3">
         <li>
-          <NavLink
-            to="/admin"
-            end
-            className={({ isActive }) =>
-              `nav-link d-flex align-items-center p-2 ${
-                isActive ? "bg-primary text-white" : "text-light"
-              }`
-            }
-          >
+          <NavLink to="/admin" end className={linkStyle}>
             <FaTachometerAlt className="me-2" /> Dashboard
           </NavLink>
         </li>
+
         <li>
-          <NavLink
-            to="/admin/products"
-            className={({ isActive }) =>
-              `nav-link d-flex align-items-center p-2 ${
-                isActive ? "bg-primary text-white" : "text-light"
-              }`
-            }
-          >
+          <NavLink to="/admin/products" className={linkStyle}>
             <FaBox className="me-2" /> Manage Products
           </NavLink>
         </li>
+
         <li>
-          <NavLink
-            to="/admin/categories"
-            className={({ isActive }) =>
-              `nav-link d-flex align-items-center p-2 ${
-                isActive ? "bg-primary text-white" : "text-light"
-              }`
-            }
-          >
+          <NavLink to="/admin/categories" className={linkStyle}>
             <FaList className="me-2" /> Manage Categories
           </NavLink>
         </li>
+
         <li>
-          <NavLink
-            to="/admin/accounts"
-            className={({ isActive }) =>
-              `nav-link d-flex align-items-center p-2 ${
-                isActive ? "bg-primary text-white" : "text-light"
-              }`
-            }
-          >
+          <NavLink to="/admin/accounts" className={linkStyle}>
             <FaUsers className="me-2" /> Manage Accounts
           </NavLink>
         </li>
+
         <li>
-          <NavLink
-            to="/admin/orders"
-            className={({ isActive }) =>
-              `nav-link d-flex align-items-center p-2 ${
-                isActive ? "bg-primary text-white" : "text-light"
-              }`
-            }
-          >
+          <NavLink to="/admin/orders" className={linkStyle}>
             <FaShoppingCart className="me-2" /> Manage Orders
           </NavLink>
         </li>
       </ul>
 
-      {/* Nút Logout */}
       <button
-        className="btn btn-danger w-100 d-flex align-items-center justify-content-center mt-3"
+        className="btn btn-light text-dark w-100 d-flex align-items-center justify-content-center mt-3 fw-bold"
         onClick={handleLogout}
       >
         <FaSignOutAlt className="me-2" /> Logout

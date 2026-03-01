@@ -1,24 +1,25 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { Table, Button, Modal, Form, Spinner, InputGroup } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { getAllUsers, updateStatusUser } from "../../api/userApi";
-import { FaSearch } from "react-icons/fa"; 
+import { FaSearch } from "react-icons/fa";
 
 const ManageAccounts = () => {
   const [users, setUsers] = useState([]);
-  const [filteredUsers, setFilteredUsers] = useState([]); 
+  const [filteredUsers, setFilteredUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showStatusModal, setShowStatusModal] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
   const [currentStatus, setCurrentStatus] = useState("active");
-  const [searchQuery, setSearchQuery] = useState(""); 
+  const [searchQuery, setSearchQuery] = useState("");
 
   const fetchUsers = async () => {
     setLoading(true);
     try {
       const usersData = await getAllUsers();
       setUsers(usersData);
-      setFilteredUsers(usersData); 
+      setFilteredUsers(usersData);
     } catch (error) {
       toast.error(error.message);
     } finally {
@@ -144,13 +145,12 @@ const ManageAccounts = () => {
               <td>{user.address || "N/A"}</td>
               <td>
                 <span
-                  className={`badge ${
-                    user.status === "active"
-                      ? "bg-success"
-                      : user.status === "inactive"
+                  className={`badge ${user.status === "active"
+                    ? "bg-success"
+                    : user.status === "inactive"
                       ? "bg-warning"
                       : "bg-danger"
-                  }`}
+                    }`}
                 >
                   {user.status}
                 </span>

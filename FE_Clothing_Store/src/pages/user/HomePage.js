@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { FaTag } from "react-icons/fa";
@@ -23,15 +24,15 @@ const HomePage = () => {
   const carousels = [
     {
       id: 1,
-      url: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEji27hydpaCs4kFdF-dwgLa6ZZIrn4zNL9fnOUCvzUKM14I8irBahfO5xzmRHCB1g_iCrBm1gByYyvkIhC2Fs_zDi45TkmdIkC2YnNeQP7OYfk18HTUGGgGYRDp3G0ERZccg7TFSUE-s-I1xq4cpUxUoZR4oPvvq-4O11ASq_ljLbk52J5iK957NGBR/s1280/fashion%20banner%20design.webp",
+      url: "https://file.hstatic.net/1000178779/collection/sale-cuoi-nam-banner-web_d1854bed64e04561b21c6871e533ab4c.png",
     },
     {
       id: 2,
-      url: "https://i.ytimg.com/vi/U5Q3Du2W9a0/maxresdefault.jpg",
+      url: "https://sigourney.vn/wp-content/uploads/2026/01/Banner-ngang-tet.jpg",
     },
     {
       id: 3,
-      url: "https://graphicsfamily.com/wp-content/uploads/edd/2022/11/Online-Shopping-AD-Banner-Design-in-Photoshop-scaled.jpg",
+      url: "https://file.hstatic.net/1000253775/article/343349024_9155559117849139_3035925125361529008_n_bbb71ca661ed4ffc8aab24131a2a0f9e.jpeg",
     },
   ];
 
@@ -39,8 +40,16 @@ const HomePage = () => {
     <Container>
       <CarouselShare carousels={carousels} />
       <Container className="py-4">
-        <h1 className="text-center mb-4">NEW ARRIVALS</h1>
-        <Row>
+        <h1
+          className="text-center mb-5"
+          style={{
+            fontWeight: 300,
+            letterSpacing: "4px",
+            fontSize: "28px",
+          }}
+        >
+          NEW ARRIVALS
+        </h1>        <Row>
           {newestProducts?.length > 0 ? (
             newestProducts?.map((product) => {
               const productImage =
@@ -59,52 +68,123 @@ const HomePage = () => {
                 product?.discountPrice < product?.price;
 
               return (
-                <Col sm={6} md={3} className="mb-4" key={product?._id}>
+                <Col sm={6} md={3} className="mb-5" key={product?._id}>
                   <Link
                     to={`/product-detail/${product?._id}`}
-                    className="nav-link"
+                    style={{ textDecoration: "none", color: "inherit" }}
                   >
-                    <Card className="product-card shadow-sm border-0">
-                      <div className="position-relative">
+                    <Card
+                      className="border-0"
+                      style={{
+                        borderRadius: "20px",
+                        overflow: "hidden",
+                        transition: "all 0.35s ease",
+                        backgroundColor: "#ffffff",
+                        boxShadow: "0 8px 25px rgba(0,0,0,0.05)",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = "translateY(-8px)";
+                        e.currentTarget.style.boxShadow =
+                          "0 20px 40px rgba(0,0,0,0.08)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = "translateY(0)";
+                        e.currentTarget.style.boxShadow =
+                          "0 8px 25px rgba(0,0,0,0.05)";
+                      }}
+                    >
+                      <div
+                        style={{
+                          overflow: "hidden",
+                          backgroundColor: "#f8f8f8",
+                        }}
+                      >
                         <Card.Img
                           variant="top"
                           src={productImage}
                           alt={product?.name}
                           style={{
-                            height: 300,
+                            height: 340,
                             objectFit: "cover",
-                            borderRadius: "10px",
+                            transition: "transform 0.6s ease",
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.transform = "scale(1.08)";
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.transform = "scale(1)";
                           }}
                         />
+
                         {isDiscounted && (
-                          <span
-                            className="badge bg-danger position-absolute"
-                            style={{ top: 10, left: 10, fontSize: "12px" }}
+                          <div
+                            style={{
+                              position: "absolute",
+                              top: 20,
+                              left: 20,
+                              backgroundColor: "#111",
+                              color: "#fff",
+                              padding: "6px 14px",
+                              borderRadius: "30px",
+                              fontSize: "11px",
+                              letterSpacing: "1px",
+                              fontWeight: 500,
+                            }}
                           >
-                            <FaTag /> Sale
-                          </span>
+                            SALE
+                          </div>
                         )}
                       </div>
 
-                      <Card.Body className="text-center">
-                        <Card.Title className="fw-bold">
+                      <Card.Body style={{ padding: "22px" }}>
+                        <Card.Title
+                          style={{
+                            fontSize: "15px",
+                            fontWeight: 500,
+                            marginBottom: "6px",
+                            letterSpacing: "0.5px",
+                          }}
+                        >
                           {product.name}
                         </Card.Title>
-                        <p className="text-muted small">
-                          {product.category?.name || "Category"}
-                        </p>
 
-                        <div className="d-flex justify-content-center align-items-center">
-                          <span className="fw-bold text-danger fs-5 me-2">
+                        <div
+                          style={{
+                            fontSize: "12px",
+                            color: "#777",
+                            marginBottom: "14px",
+                          }}
+                        >
+                          {product.category?.name || "Category"}
+                        </div>
+
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "10px",
+                          }}
+                        >
+                          <span
+                            style={{
+                              fontSize: "18px",
+                              fontWeight: 600,
+                              color: "#111",
+                            }}
+                          >
                             ${finalPrice.toLocaleString()}
                           </span>
+
                           {isDiscounted && (
-                            <s
-                              className="text-muted"
-                              style={{ fontSize: "14px" }}
+                            <span
+                              style={{
+                                textDecoration: "line-through",
+                                fontSize: "14px",
+                                color: "#aaa",
+                              }}
                             >
                               ${product.price.toLocaleString()}
-                            </s>
+                            </span>
                           )}
                         </div>
                       </Card.Body>
@@ -118,9 +198,30 @@ const HomePage = () => {
           )}
         </Row>
 
-        <div className="d-flex justify-content-center align-items-center">
-          <Link to="/our-store" className="nav-link">
-            <Button className="custom-button">View All</Button>
+        <div className="d-flex justify-content-center mt-4">
+          <Link to="/our-store" style={{ textDecoration: "none" }}>
+            <Button
+              style={{
+                backgroundColor: "#111",
+                border: "none",
+                padding: "12px 40px",
+                borderRadius: "40px",
+                fontSize: "14px",
+                letterSpacing: "2px",
+                fontWeight: 500,
+                transition: "all 0.3s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "#333";
+                e.currentTarget.style.transform = "translateY(-3px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "#111";
+                e.currentTarget.style.transform = "translateY(0)";
+              }}
+            >
+              VIEW ALL
+            </Button>
           </Link>
         </div>
       </Container>

@@ -1,6 +1,6 @@
-# 🛍️ Unistyle Clothing Store
+# 🛍️ High Clothing Store
 
-Unistyle Clothing Store là website bán quần áo được xây dựng theo mô hình Fullstack:
+High Clothing Store là website bán quần áo được xây dựng theo mô hình Fullstack:
 
 - **Frontend:** ReactJS
 - **Backend:** NodeJS + Express
@@ -121,9 +121,9 @@ export const API_BASE_URL = "http://localhost:8000/api";
 ---
 
 # 👨‍💻 Tác giả
-Group 2 _SDN302
-Nguyễn Tấn 
-Lê Văn Nguyễn
-Trương Ngọc Trân
-Quách Khánh Duy
-Thành An
+- Group 2 _SDN302
+- Nguyễn Tấn 
+- Lê Văn Nguyễn
+- Trương Ngọc Trân
+- Quách Khánh Duy
+- Thành An

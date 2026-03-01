@@ -15,6 +15,28 @@ const Sidebar = ({
   const [minInput, setMinInput] = useState("");
   const [maxInput, setMaxInput] = useState("");
 
+  // ===== PREMIUM BUTTON STYLES =====
+  const baseBtnStyle = {
+    borderRadius: "25px",
+    fontWeight: "600",
+    transition: "all 0.3s ease",
+    letterSpacing: "0.5px",
+    border: "none",
+    padding: "8px 12px",
+  };
+
+  const activeStyle = {
+    background: "linear-gradient(135deg, #141E30, #243B55)",
+    color: "#fff",
+    boxShadow: "0 4px 15px rgba(0,0,0,0.3)",
+  };
+
+  const outlineStyle = {
+    background: "#fff",
+    color: "#243B55",
+    border: "1px solid #243B55",
+  };
+
   useEffect(() => {
     const fetchCategoryData = async () => {
       try {
@@ -36,72 +58,87 @@ const Sidebar = ({
     setMaxPrice(maxInput);
   };
 
+  const handleHover = (e) => {
+    e.currentTarget.style.transform = "scale(1.05)";
+  };
+
+  const handleLeave = (e) => {
+    e.currentTarget.style.transform = "scale(1)";
+  };
+
   return (
     <div className="col-md-3">
-      <div className="card mb-4">
+      {/* ===== GENDER CARD ===== */}
+      <div className="card mb-4 shadow-sm">
         <div className="card-body">
-          <h5 className="card-title text-center">Choose Gender</h5>
+          <h5 className="card-title text-center mb-3">Choose Gender</h5>
           <div className="d-flex gap-2">
-            <button
-              className={`btn ${
-                selectedGender === "" ? "btn-primary" : "btn-outline-primary"
-              } w-100`}
-              onClick={() => setSelectedGender("")}
-            >
-              All
-            </button>
-            <button
-              className={`btn ${
-                selectedGender === "Men" ? "btn-primary" : "btn-outline-primary"
-              } w-100`}
-              onClick={() => setSelectedGender("Men")}
-            >
-              Men
-            </button>
-            <button
-              className={`btn ${
-                selectedGender === "Women"
-                  ? "btn-primary"
-                  : "btn-outline-primary"
-              } w-100`}
-              onClick={() => setSelectedGender("Women")}
-            >
-              Women
-            </button>
+            {["", "Men", "Women"].map((gender, index) => (
+              <button
+                key={index}
+                style={{
+                  ...baseBtnStyle,
+                  ...(selectedGender === gender
+                    ? activeStyle
+                    : outlineStyle),
+                }}
+                className="w-100"
+                onClick={() => setSelectedGender(gender)}
+                onMouseEnter={handleHover}
+                onMouseLeave={handleLeave}
+              >
+                {gender === "" ? "All" : gender}
+              </button>
+            ))}
           </div>
         </div>
       </div>
 
-      <div className="card mb-4">
+      {/* ===== CATEGORY CARD ===== */}
+      <div className="card mb-4 shadow-sm">
         <div className="card-body">
-          <h5 className="card-title text-center">Shop By Categories</h5>
+          <h5 className="card-title text-center mb-3">
+            Shop By Categories
+          </h5>
+
           {isFetching ? (
             <p>Loading categories...</p>
           ) : (
             <div className="row">
               <div className="col-6 mb-2">
                 <button
-                  className={`btn ${
-                    selectedCategory === ""
-                      ? "btn-primary"
-                      : "btn-outline-primary"
-                  } w-100`}
+                  style={{
+                    ...baseBtnStyle,
+                    ...(selectedCategory === ""
+                      ? activeStyle
+                      : outlineStyle),
+                  }}
+                  className="w-100"
                   onClick={() => setSelectedCategory("")}
+                  onMouseEnter={handleHover}
+                  onMouseLeave={handleLeave}
                 >
                   All
                 </button>
               </div>
+
               {categories
                 ?.filter((cat) => cat.status === "active")
                 ?.map((category) => (
                   <div key={category._id} className="col-6 mb-2">
                     <button
-                      className={`btn ${
-                        selectedCategory === category.name
-                          ? "btn-primary"
-                          : "btn-outline-primary"
-                      } w-100`}
-                      onClick={() => setSelectedCategory(category.name)}
+                      style={{
+                        ...baseBtnStyle,
+                        ...(selectedCategory === category.name
+                          ? activeStyle
+                          : outlineStyle),
+                      }}
+                      className="w-100"
+                      onClick={() =>
+                        setSelectedCategory(category.name)
+                      }
+                      onMouseEnter={handleHover}
+                      onMouseLeave={handleLeave}
                     >
                       {category.name}
                     </button>
@@ -112,40 +149,54 @@ const Sidebar = ({
         </div>
       </div>
 
-      <div className="card">
+      {/* ===== PRICE FILTER CARD ===== */}
+      <div className="card shadow-sm">
         <div className="card-body">
-          <h5 className="card-title">Filter By</h5>
-          <div className="mb-4">
-            <h6>Price</h6>
-            <div className="form-row d-flex gap-2">
-              <div className="col">
-                <input
-                  type="number"
-                  className="form-control"
-                  placeholder="$ from"
-                  value={minInput}
-                  min={1}
-                  onChange={(e) => setMinInput(e.target.value)}
-                />
-              </div>
-              <div className="col">
-                <input
-                  type="number"
-                  className="form-control"
-                  placeholder="$ to"
-                  value={maxInput}
-                  min={1}
-                  onChange={(e) => setMaxInput(e.target.value)}
-                />
-              </div>
-            </div>
-            <button
-              className="btn btn-primary w-100 mt-3"
-              onClick={handlePriceChange}
-            >
-              Apply Price Filter
-            </button>
+          <h5 className="card-title mb-3">Filter By</h5>
+          <h6>Price</h6>
+
+          <div className="d-flex gap-2 mb-3">
+            <input
+              type="number"
+              className="form-control"
+              placeholder="$ from"
+              value={minInput}
+              min={1}
+              onChange={(e) => setMinInput(e.target.value)}
+            />
+            <input
+              type="number"
+              className="form-control"
+              placeholder="$ to"
+              value={maxInput}
+              min={1}
+              onChange={(e) => setMaxInput(e.target.value)}
+            />
           </div>
+
+          <button
+            style={{
+              ...baseBtnStyle,
+              background:
+                "linear-gradient(135deg, #0f2027, #203a43, #2c5364)",
+              color: "#fff",
+              boxShadow: "0 4px 15px rgba(0,0,0,0.3)",
+            }}
+            className="w-100"
+            onClick={handlePriceChange}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "scale(1.05)";
+              e.currentTarget.style.boxShadow =
+                "0 8px 20px rgba(0,0,0,0.4)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "scale(1)";
+              e.currentTarget.style.boxShadow =
+                "0 4px 15px rgba(0,0,0,0.3)";
+            }}
+          >
+            Apply Price Filter
+          </button>
         </div>
       </div>
     </div>

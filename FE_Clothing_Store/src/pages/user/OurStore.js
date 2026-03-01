@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { ProductCard } from "../../components/ProductCard";
 import Sidebar from "../../components/Sidebar";
@@ -44,9 +45,11 @@ const OurStore = () => {
       queryParams.append("status", "active");
 
       const res = await axios.get(`${API_BASE_URL}/products?${queryParams}`);
-      const { data, pagination } = res.data;
-      setAllProducts(data);
-      setPagination(pagination);
+      setAllProducts(res.data);
+      setPagination({
+        currentPage: 1,
+        totalPages: 1,
+      });
     } catch (error) {
       console.error("Error fetching products:", error);
       setAllProducts([]);

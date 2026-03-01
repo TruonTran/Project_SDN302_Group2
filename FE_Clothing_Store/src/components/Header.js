@@ -28,118 +28,140 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-dark text-white py-3 fixed-top">
+    <header
+      className="py-3 fixed-top"
+      style={{
+        backgroundColor: "#ffffff",
+        boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
+        borderBottom: "1px solid #eee",
+      }}
+    >
       <div className="container">
         <div className="d-flex justify-content-between align-items-center">
-          <NavLink to="/" className="nav-link text-white">
-            <h4>Unistyle Clothing</h4>
+
+          {/* LOGO */}
+          <NavLink
+            to="/"
+            className="nav-link"
+            style={{
+              fontWeight: "700",
+              fontSize: "20px",
+              color: "#1e3a8a",
+              letterSpacing: "1px",
+            }}
+          >
+            High Clothing
           </NavLink>
 
+          {/* NAV MENU */}
           <nav
-            className="navbar d-flex justify-content-between align-items-center border bg-light px-5 py-2 rounded"
-            style={{ width: 500 }}
+            className="d-flex justify-content-between align-items-center px-4 py-2 rounded-pill"
+            style={{
+              width: 500,
+              backgroundColor: "#f1f5f9",
+            }}
           >
-            <NavLink
-              to="/"
-              end
-              className={({ isActive }) =>
-                `nav-link px-2 rounded ${
-                  isActive ? "bg-dark text-white" : "text-black"
-                }`
-              }
-            >
-              Home
-            </NavLink>
-            <NavLink
-              to="/our-store"
-              className={({ isActive }) =>
-                `nav-link px-2 rounded ${
-                  isActive ? "bg-dark text-white" : "text-black"
-                }`
-              }
-            >
-              Our Store
-            </NavLink>
-            <NavLink
-              to="/about"
-              className={({ isActive }) =>
-                `nav-link px-2 rounded ${
-                  isActive ? "bg-dark text-white" : "text-black"
-                }`
-              }
-            >
-              About
-            </NavLink>
-            <NavLink
-              to="/contact"
-              className={({ isActive }) =>
-                `nav-link px-2 rounded ${
-                  isActive ? "bg-dark text-white" : "text-black"
-                }`
-              }
-            >
-              Contact
-            </NavLink>
+            {["/", "/our-store", "/about", "/contact"].map((path, index) => {
+              const names = ["Home", "Our Store", "About", "Contact"];
+              return (
+                <NavLink
+                  key={index}
+                  to={path}
+                  end={path === "/"}
+                  className="nav-link px-3 rounded-pill"
+                  style={({ isActive }) => ({
+                    color: isActive ? "#ffffff" : "#1e293b",
+                    backgroundColor: isActive ? "#2563eb" : "transparent",
+                    fontWeight: "500",
+                    transition: "0.3s",
+                  })}
+                >
+                  {names[index]}
+                </NavLink>
+              );
+            })}
           </nav>
 
+          {/* SEARCH */}
           <Form onSubmit={handleSearch} className="d-flex">
             <Form.Control
               type="text"
               placeholder="Search product"
-              className="me-2 py-2"
+              className="me-2"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
+              style={{
+                borderRadius: "20px",
+                border: "1px solid #cbd5e1",
+                padding: "6px 15px",
+              }}
             />
-            <Button type="submit" variant="light">
+            <Button
+              type="submit"
+              style={{
+                backgroundColor: "#2563eb",
+                border: "none",
+                borderRadius: "50%",
+                width: "38px",
+                height: "38px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
               <FaSearch />
             </Button>
           </Form>
 
-          <nav className="d-flex align-items-center" style={{ width: "10%" }}>
-            <NavLink
-              to="/cart"
-              className="text-white mx-3"
-              style={{ width: "50%" }}
-            >
-              <FaShoppingCart size={24} />
-            </NavLink>
-            <div style={{ width: "50%" }}>
-              {user ? (
-                <Dropdown>
-                  <Dropdown.Toggle
-                    variant="link"
-                    id="dropdown-basic"
-                    className="text-white"
-                  >
-                    <img
-                      src={
-                        user.avatar
-                          ? `${URL_IMG}${user.avatar}`
-                          : "https://cdn-icons-png.flaticon.com/512/219/219988.png"
-                      }
-                      alt="User Avatar"
-                      className="rounded-circle"
-                      style={{ width: "30px", height: "30px" }}
-                    />
-                  </Dropdown.Toggle>
+          {/* CART + USER */}
+          <div className="d-flex align-items-center gap-3">
 
-                  <Dropdown.Menu>
-                    <Dropdown.Item as={NavLink} to="/profile">
-                      Profile
-                    </Dropdown.Item>
-                    <Dropdown.Item as={NavLink} to="/tracking-order">
-                      Tracking Order
-                    </Dropdown.Item>
-                    <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-              ) : (
-                <NavLink to="/login" className="text-white mx-3">
-                  <FaUserCircle size={30} />
-                </NavLink>
-              )}
-            </div>
-          </nav>
+            <NavLink to="/cart" style={{ color: "#1e293b" }}>
+              <FaShoppingCart size={22} />
+            </NavLink>
+
+            {user ? (
+              <Dropdown>
+                <Dropdown.Toggle
+                  variant="link"
+                  id="dropdown-basic"
+                  style={{ padding: 0 }}
+                >
+                  <img
+                    src={
+                      user.avatar
+                        ? `${URL_IMG}${user.avatar}`
+                        : "https://cdn-icons-png.flaticon.com/512/219/219988.png"
+                    }
+                    alt="User Avatar"
+                    className="rounded-circle"
+                    style={{
+                      width: "35px",
+                      height: "35px",
+                      border: "2px solid #2563eb",
+                    }}
+                  />
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu align="end">
+                  <Dropdown.Item as={NavLink} to="/profile">
+                    Profile
+                  </Dropdown.Item>
+                  <Dropdown.Item as={NavLink} to="/tracking-order">
+                    Tracking Order
+                  </Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item onClick={handleLogout}>
+                    Logout
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            ) : (
+              <NavLink to="/login" style={{ color: "#1e293b" }}>
+                <FaUserCircle size={26} />
+              </NavLink>
+            )}
+          </div>
         </div>
       </div>
     </header>
