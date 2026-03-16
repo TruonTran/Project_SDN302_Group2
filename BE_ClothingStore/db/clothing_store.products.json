@@ -1,0 +1,1066 @@
+[{
+  "_id": {
+    "$oid": "67cde13534dd98846323bf97"
+  },
+  "name": "Classic Cotton T-Shirt 2ss",
+  "description": "Soft and comfortable cotton t-shirt. hh",
+  "price": 200,
+  "discountPrice": 150,
+  "category": {
+    "$oid": "67cddf7234dd98846323bf7f"
+  },
+  "images": [
+    "products/1741977062355.jpg",
+    "products/1741977071690.jpg"
+  ],
+  "variants": [
+    {
+      "size": "S",
+      "color": "White",
+      "stock": 15,
+      "_id": {
+        "$oid": "67cde13534dd98846323bf98"
+      }
+    }
+  ],
+  "status": "inactive",
+  "createdAt": {
+    "$date": "2025-03-09T18:43:01.081Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-15T09:36:45.037Z"
+  },
+  "__v": 6
+},
+{
+  "_id": {
+    "$oid": "67cde15734dd98846323bf9b"
+  },
+  "name": "Casual Graphic Tee",
+  "description": "Trendy graphic t-shirt for everyday wear.",
+  "price": 25,
+  "discountPrice": 0,
+  "category": {
+    "$oid": "67cddf8f34dd98846323bf82"
+  },
+  "images": [
+    "products/1741977084070.jpg"
+  ],
+  "variants": [
+    {
+      "size": "L",
+      "color": "Black",
+      "stock": 26,
+      "_id": {
+        "$oid": "67cde15734dd98846323bf9c"
+      }
+    }
+  ],
+  "status": "inactive",
+  "createdAt": {
+    "$date": "2025-03-09T18:43:35.771Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-15T09:36:57.556Z"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "67cde1c834dd98846323bfa2"
+  },
+  "name": "Slim Fit Jeans",
+  "description": "High-quality denim with a slim fit design.",
+  "price": 45,
+  "discountPrice": 40,
+  "category": {
+    "$oid": "67cddf9834dd98846323bf85"
+  },
+  "images": [
+    "products/1741977109403.jpg",
+    "products/1741977109405.jpg"
+  ],
+  "variants": [
+    {
+      "size": "M",
+      "color": "Blue",
+      "stock": 21,
+      "_id": {
+        "$oid": "67cde1c834dd98846323bfa3"
+      }
+    }
+  ],
+  "status": "inactive",
+  "createdAt": {
+    "$date": "2025-03-09T18:45:28.488Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-15T09:38:14.985Z"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "67cde21a34dd98846323bfa6"
+  },
+  "name": "Classic Denim Jacket",
+  "description": "Trendy and stylish denim jacket.",
+  "price": 60,
+  "discountPrice": 55,
+  "category": {
+    "$oid": "67cddf9f34dd98846323bf88"
+  },
+  "images": [
+    "products/1741977121845.jpg",
+    "products/1741977121846.jpg"
+  ],
+  "variants": [
+    {
+      "size": "XL",
+      "color": "Blue",
+      "stock": 15,
+      "_id": {
+        "$oid": "67cde21a34dd98846323bfa7"
+      }
+    }
+  ],
+  "status": "active",
+  "createdAt": {
+    "$date": "2025-03-09T18:46:50.902Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-14T18:32:01.851Z"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "67cde24b34dd98846323bfaa"
+  },
+  "name": "Elegant Evening Dress",
+  "description": "Perfect evening dress for formal occasions.",
+  "price": 120,
+  "discountPrice": 99,
+  "category": {
+    "$oid": "67cddf7234dd98846323bf7f"
+  },
+  "images": [
+    "products/1741977097756.jpg",
+    "products/1741977368387.jpg"
+  ],
+  "variants": [
+    {
+      "size": "S",
+      "color": "Red",
+      "stock": 20,
+      "_id": {
+        "$oid": "67cde24b34dd98846323bfab"
+      }
+    }
+  ],
+  "status": "active",
+  "createdAt": {
+    "$date": "2025-03-09T18:47:39.989Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-14T18:36:08.390Z"
+  },
+  "__v": 2
+},
+{
+  "_id": {
+    "$oid": "67cde25934dd98846323bfae"
+  },
+  "name": "Floral Summer Dress",
+  "description": "Lightweight and stylish summer dress.",
+  "price": 80,
+  "discountPrice": 70,
+  "category": {
+    "$oid": "67cddf7234dd98846323bf7f"
+  },
+  "images": [
+    "products/1741977132080.jpg"
+  ],
+  "variants": [
+    {
+      "size": "XS",
+      "color": "White",
+      "stock": 30,
+      "_id": {
+        "$oid": "67cde25934dd98846323bfaf"
+      }
+    }
+  ],
+  "status": "active",
+  "createdAt": {
+    "$date": "2025-03-09T18:47:53.013Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-14T18:32:12.086Z"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "67cde34a34dd98846323bfb2"
+  },
+  "name": "Pullover Hoodie",
+  "description": "Warm and cozy hoodie, available in multiple colors.",
+  "price": 50,
+  "discountPrice": 45,
+  "category": {
+    "$oid": "67cddf9f34dd98846323bf88"
+  },
+  "images": [
+    "products/1741977153847.jpg"
+  ],
+  "variants": [
+    {
+      "size": "S",
+      "color": "Gray",
+      "stock": 30,
+      "_id": {
+        "$oid": "67cde34a34dd98846323bfb3"
+      }
+    },
+    {
+      "size": "M",
+      "color": "Black",
+      "stock": 25,
+      "_id": {
+        "$oid": "67cde34a34dd98846323bfb4"
+      }
+    },
+    {
+      "size": "L",
+      "color": "Navy",
+      "stock": 20,
+      "_id": {
+        "$oid": "67cde34a34dd98846323bfb5"
+      }
+    },
+    {
+      "size": "XL",
+      "color": "Red",
+      "stock": 15,
+      "_id": {
+        "$oid": "67cde34a34dd98846323bfb6"
+      }
+    }
+  ],
+  "status": "active",
+  "createdAt": {
+    "$date": "2025-03-09T18:51:54.711Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-14T18:32:33.853Z"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "67cde38434dd98846323bfb9"
+  },
+  "name": "Casual Cargo Pants",
+  "description": "Versatile cargo pants with extra pockets.",
+  "price": 55,
+  "discountPrice": 50,
+  "category": {
+    "$oid": "67cddf9834dd98846323bf85"
+  },
+  "images": [
+    "products/1741977315904.jpg"
+  ],
+  "variants": [
+    {
+      "size": "S",
+      "color": "Gray",
+      "stock": 22,
+      "_id": {
+        "$oid": "67cde38434dd98846323bfba"
+      }
+    },
+    {
+      "size": "M",
+      "color": "Green",
+      "stock": 18,
+      "_id": {
+        "$oid": "67cde38434dd98846323bfbb"
+      }
+    },
+    {
+      "size": "L",
+      "color": "Black",
+      "stock": 14,
+      "_id": {
+        "$oid": "67cde38434dd98846323bfbc"
+      }
+    },
+    {
+      "size": "XL",
+      "color": "Green",
+      "stock": 10,
+      "_id": {
+        "$oid": "67cde38434dd98846323bfbd"
+      }
+    }
+  ],
+  "status": "inactive",
+  "createdAt": {
+    "$date": "2025-03-09T18:52:52.334Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-09T18:52:52.334Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67cde3bc34dd98846323bfc0"
+  },
+  "name": "Casual Polo Shirt",
+  "description": "Classic polo shirt, perfect for casual and semi-formal wear.",
+  "price": 35,
+  "discountPrice": 30,
+  "category": {
+    "$oid": "67cddf8f34dd98846323bf82"
+  },
+  "images": [
+    "products/1741977201914.jpg"
+  ],
+  "variants": [
+    {
+      "size": "S",
+      "color": "White",
+      "stock": 20,
+      "_id": {
+        "$oid": "67cde3bc34dd98846323bfc1"
+      }
+    },
+    {
+      "size": "M",
+      "color": "Black",
+      "stock": 25,
+      "_id": {
+        "$oid": "67cde3bc34dd98846323bfc2"
+      }
+    },
+    {
+      "size": "L",
+      "color": "Navy",
+      "stock": 18,
+      "_id": {
+        "$oid": "67cde3bc34dd98846323bfc3"
+      }
+    }
+  ],
+  "status": "active",
+  "createdAt": {
+    "$date": "2025-03-09T18:53:48.492Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-14T18:33:21.920Z"
+  },
+  "__v": 2
+},
+{
+  "_id": {
+    "$oid": "67cde41322306f66c633a453"
+  },
+  "name": "Striped Long Sleeve Shirt",
+  "description": "Stylish striped long sleeve shirt for everyday wear.",
+  "price": 40,
+  "discountPrice": 35,
+  "category": {
+    "$oid": "67cddf8f34dd98846323bf82"
+  },
+  "images": [
+    "products/1741977175691.jpg"
+  ],
+  "variants": [
+    {
+      "size": "S",
+      "color": "Blue",
+      "stock": 19,
+      "_id": {
+        "$oid": "67cde41322306f66c633a454"
+      }
+    },
+    {
+      "size": "M",
+      "color": "Black",
+      "stock": 20,
+      "_id": {
+        "$oid": "67cde41322306f66c633a455"
+      }
+    },
+    {
+      "size": "L",
+      "color": "White",
+      "stock": 12,
+      "_id": {
+        "$oid": "67cde41322306f66c633a456"
+      }
+    }
+  ],
+  "status": "active",
+  "createdAt": {
+    "$date": "2025-03-09T18:55:15.414Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-14T18:32:55.709Z"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "67cde42e22306f66c633a459"
+  },
+  "name": "Slim Fit Chinos",
+  "description": "Stylish slim fit chinos for a smart-casual look.",
+  "price": 50,
+  "discountPrice": 45,
+  "category": {
+    "$oid": "67cddf9834dd98846323bf85"
+  },
+  "images": [
+    "products/1741977214170.jpg"
+  ],
+  "variants": [
+    {
+      "size": "S",
+      "color": "Gray",
+      "stock": 18,
+      "_id": {
+        "$oid": "67cde42e22306f66c633a45a"
+      }
+    },
+    {
+      "size": "M",
+      "color": "Navy",
+      "stock": 20,
+      "_id": {
+        "$oid": "67cde42e22306f66c633a45b"
+      }
+    },
+    {
+      "size": "L",
+      "color": "Black",
+      "stock": 22,
+      "_id": {
+        "$oid": "67cde42e22306f66c633a45c"
+      }
+    }
+  ],
+  "status": "active",
+  "createdAt": {
+    "$date": "2025-03-09T18:55:42.440Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-14T18:33:34.173Z"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "67cde43d22306f66c633a45f"
+  },
+  "name": "Ripped Skinny Jeans",
+  "description": "Trendy skinny jeans with a ripped design.",
+  "price": 60,
+  "discountPrice": 55,
+  "category": {
+    "$oid": "67cddf9834dd98846323bf85"
+  },
+  "images": [
+    "products/1741977262594.jpg"
+  ],
+  "variants": [
+    {
+      "size": "S",
+      "color": "Blue",
+      "stock": 12,
+      "_id": {
+        "$oid": "67cde43d22306f66c633a460"
+      }
+    },
+    {
+      "size": "M",
+      "color": "Gray",
+      "stock": 15,
+      "_id": {
+        "$oid": "67cde43d22306f66c633a461"
+      }
+    },
+    {
+      "size": "L",
+      "color": "Black",
+      "stock": 18,
+      "_id": {
+        "$oid": "67cde43d22306f66c633a462"
+      }
+    }
+  ],
+  "status": "active",
+  "createdAt": {
+    "$date": "2025-03-09T18:55:57.692Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-14T18:34:22.601Z"
+  },
+  "__v": 2
+},
+{
+  "_id": {
+    "$oid": "67cde45022306f66c633a465"
+  },
+  "name": "Classic Hooded Jacket",
+  "description": "Warm and stylish hooded jacket for cold weather.",
+  "price": 75,
+  "discountPrice": 70,
+  "category": {
+    "$oid": "67cddf9f34dd98846323bf88"
+  },
+  "images": [
+    "products/1741977232833.jpg"
+  ],
+  "variants": [
+    {
+      "size": "M",
+      "color": "Gray",
+      "stock": 25,
+      "_id": {
+        "$oid": "67cde45022306f66c633a466"
+      }
+    },
+    {
+      "size": "L",
+      "color": "Black",
+      "stock": 20,
+      "_id": {
+        "$oid": "67cde45022306f66c633a467"
+      }
+    },
+    {
+      "size": "XL",
+      "color": "Navy",
+      "stock": 15,
+      "_id": {
+        "$oid": "67cde45022306f66c633a468"
+      }
+    }
+  ],
+  "status": "active",
+  "createdAt": {
+    "$date": "2025-03-09T18:56:16.687Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-14T18:33:52.840Z"
+  },
+  "__v": 2
+},
+{
+  "_id": {
+    "$oid": "67cde46022306f66c633a46b"
+  },
+  "name": "Heavyweight Sweatshirt",
+  "description": "Durable and warm sweatshirt for daily wear.",
+  "price": 55,
+  "discountPrice": 50,
+  "category": {
+    "$oid": "67cddf8f34dd98846323bf82"
+  },
+  "images": [
+    "products/1741977276410.jpg",
+    "products/1741977276410.jpg",
+    "products/1741977276410.jpg"
+  ],
+  "variants": [
+    {
+      "size": "M",
+      "color": "Black",
+      "stock": 30,
+      "_id": {
+        "$oid": "67cde46022306f66c633a46c"
+      }
+    },
+    {
+      "size": "L",
+      "color": "Gray",
+      "stock": 25,
+      "_id": {
+        "$oid": "67cde46022306f66c633a46d"
+      }
+    }
+  ],
+  "status": "active",
+  "createdAt": {
+    "$date": "2025-03-09T18:56:32.212Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-14T18:34:36.415Z"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "67cde47f22306f66c633a470"
+  },
+  "name": "Linen Button-Up Shirt",
+  "description": "Lightweight linen shirt perfect for warm weather.",
+  "price": 45,
+  "discountPrice": 40,
+  "category": {
+    "$oid": "67cddf8f34dd98846323bf82"
+  },
+  "images": [
+    "products/1741977287091.jpg",
+    "products/1741977287091.jpg"
+  ],
+  "variants": [
+    {
+      "size": "S",
+      "color": "White",
+      "stock": 12,
+      "_id": {
+        "$oid": "67cde47f22306f66c633a471"
+      }
+    },
+    {
+      "size": "M",
+      "color": "Red",
+      "stock": 18,
+      "_id": {
+        "$oid": "67cde47f22306f66c633a472"
+      }
+    }
+  ],
+  "status": "active",
+  "createdAt": {
+    "$date": "2025-03-09T18:57:03.690Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-14T18:34:47.110Z"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "67cde74008ef40cf8a0e1933"
+  },
+  "name": "Classic Zip-Up Hoodie",
+  "description": "A comfortable and versatile hoodie, perfect for casual wear and layering.",
+  "price": 45,
+  "discountPrice": 40,
+  "category": {
+    "$oid": "67cde697f0731625f00faf75"
+  },
+  "images": [
+    "products/1741977299404.jpg",
+    "products/1741977299404.jpg"
+  ],
+  "variants": [
+    {
+      "size": "S",
+      "color": "Gray",
+      "stock": 30,
+      "_id": {
+        "$oid": "67cde74008ef40cf8a0e1934"
+      }
+    },
+    {
+      "size": "M",
+      "color": "Gray",
+      "stock": 25,
+      "_id": {
+        "$oid": "67cde74008ef40cf8a0e1935"
+      }
+    },
+    {
+      "size": "L",
+      "color": "Black",
+      "stock": 20,
+      "_id": {
+        "$oid": "67cde74008ef40cf8a0e1936"
+      }
+    }
+  ],
+  "status": "active",
+  "createdAt": {
+    "$date": "2025-03-09T19:08:48.576Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-14T18:34:59.412Z"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "67cde76408ef40cf8a0e1939"
+  },
+  "name": "Flannel Shirt",
+  "description": "A cozy flannel shirt, ideal for layering during cooler months.",
+  "price": 35,
+  "discountPrice": 32,
+  "category": {
+    "$oid": "67cddf8f34dd98846323bf82"
+  },
+  "images": [
+    "products/1741977307490.jpg"
+  ],
+  "variants": [
+    {
+      "size": "M",
+      "color": "Red",
+      "stock": 25,
+      "_id": {
+        "$oid": "67cde76408ef40cf8a0e193a"
+      }
+    },
+    {
+      "size": "L",
+      "color": "Green",
+      "stock": 20,
+      "_id": {
+        "$oid": "67cde76408ef40cf8a0e193b"
+      }
+    },
+    {
+      "size": "XL",
+      "color": "Blue",
+      "stock": 15,
+      "_id": {
+        "$oid": "67cde76408ef40cf8a0e193c"
+      }
+    }
+  ],
+  "status": "active",
+  "createdAt": {
+    "$date": "2025-03-09T19:09:24.712Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-14T18:35:07.495Z"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "67cde76e08ef40cf8a0e193f"
+  },
+  "name": "Cargo Pants",
+  "description": "Durable cargo pants with multiple pockets, suitable for outdoor activities.",
+  "price": 50,
+  "discountPrice": 45,
+  "category": {
+    "$oid": "67cddf9834dd98846323bf85"
+  },
+  "images": [
+    "products/1741977315904.jpg"
+  ],
+  "variants": [
+    {
+      "size": "S",
+      "color": "Gray",
+      "stock": 30,
+      "_id": {
+        "$oid": "67cde76e08ef40cf8a0e1940"
+      }
+    },
+    {
+      "size": "M",
+      "color": "Green",
+      "stock": 25,
+      "_id": {
+        "$oid": "67cde76e08ef40cf8a0e1941"
+      }
+    },
+    {
+      "size": "L",
+      "color": "Black",
+      "stock": 20,
+      "_id": {
+        "$oid": "67cde76e08ef40cf8a0e1942"
+      }
+    }
+  ],
+  "status": "active",
+  "createdAt": {
+    "$date": "2025-03-09T19:09:34.071Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-14T18:35:15.907Z"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "67cde77e08ef40cf8a0e1945"
+  },
+  "name": "Wool Blazer",
+  "description": "A premium wool blazer for a sophisticated and stylish look.",
+  "price": 120,
+  "discountPrice": 110,
+  "category": {
+    "$oid": "67cddf9f34dd98846323bf88"
+  },
+  "images": [
+    "products/1741977324971.jpg"
+  ],
+  "variants": [
+    {
+      "size": "M",
+      "color": "Gray",
+      "stock": 15,
+      "_id": {
+        "$oid": "67cde77e08ef40cf8a0e1946"
+      }
+    },
+    {
+      "size": "L",
+      "color": "Navy",
+      "stock": 12,
+      "_id": {
+        "$oid": "67cde77e08ef40cf8a0e1947"
+      }
+    }
+  ],
+  "status": "active",
+  "createdAt": {
+    "$date": "2025-03-09T19:09:50.014Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-14T18:35:24.977Z"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "67cde78a08ef40cf8a0e194a"
+  },
+  "name": "Padded Winter Jacket",
+  "description": "A warm and insulated jacket designed for extreme cold weather.",
+  "price": 150,
+  "discountPrice": 135,
+  "category": {
+    "$oid": "67cddf9f34dd98846323bf88"
+  },
+  "images": [
+    "products/1741977334639.jpg"
+  ],
+  "variants": [
+    {
+      "size": "M",
+      "color": "Black",
+      "stock": 10,
+      "_id": {
+        "$oid": "67cde78a08ef40cf8a0e194b"
+      }
+    },
+    {
+      "size": "L",
+      "color": "Gray",
+      "stock": 8,
+      "_id": {
+        "$oid": "67cde78a08ef40cf8a0e194c"
+      }
+    }
+  ],
+  "status": "active",
+  "createdAt": {
+    "$date": "2025-03-09T19:10:02.462Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-14T18:35:34.644Z"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "67cde7a808ef40cf8a0e194f"
+  },
+  "name": "Classic Leather Jacket",
+  "description": "Timeless leather jacket with a premium finish.",
+  "price": 180,
+  "discountPrice": 160,
+  "category": {
+    "$oid": "67cddf9f34dd98846323bf88"
+  },
+  "images": [
+    "products/1741977343473.jpg",
+    "products/1741977343475.jpg"
+  ],
+  "variants": [
+    {
+      "size": "M",
+      "color": "Navy",
+      "stock": 12,
+      "_id": {
+        "$oid": "67cde7a808ef40cf8a0e1950"
+      }
+    },
+    {
+      "size": "L",
+      "color": "Black",
+      "stock": 10,
+      "_id": {
+        "$oid": "67cde7a808ef40cf8a0e1951"
+      }
+    }
+  ],
+  "status": "active",
+  "createdAt": {
+    "$date": "2025-03-09T19:10:32.342Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-14T18:35:43.479Z"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "67cde7ba08ef40cf8a0e1954"
+  },
+  "name": "Oversized Sweatshirt 3",
+  "description": "Super comfortable and trendy oversized sweatshirt.",
+  "price": 55,
+  "discountPrice": 50,
+  "category": {
+    "$oid": "67cddf8f34dd98846323bf82"
+  },
+  "images": [
+    "products/1741977352456.jpg"
+  ],
+  "variants": [
+    {
+      "size": "L",
+      "color": "Gray",
+      "stock": 20,
+      "_id": {
+        "$oid": "67d085e59989dde6a516817b"
+      }
+    },
+    {
+      "size": "XL",
+      "color": "Black",
+      "stock": 15,
+      "_id": {
+        "$oid": "67d085e59989dde6a516817c"
+      }
+    }
+  ],
+  "status": "active",
+  "createdAt": {
+    "$date": "2025-03-09T19:10:50.641Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-14T18:35:52.473Z"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "67d0855b125631d5bff7c674"
+  },
+  "name": "Oversized Sweatshirt 2",
+  "description": "Super comfortable and trendy oversized sweatshirt.",
+  "price": 55,
+  "discountPrice": 50,
+  "category": {
+    "$oid": "67cddf8f34dd98846323bf82"
+  },
+  "images": [
+    "products/1741977360648.jpg"
+  ],
+  "variants": [
+    {
+      "size": "L",
+      "color": "Gray",
+      "stock": 20,
+      "_id": {
+        "$oid": "67d0855b125631d5bff7c675"
+      }
+    },
+    {
+      "size": "XL",
+      "color": "Black",
+      "stock": 15,
+      "_id": {
+        "$oid": "67d0855b125631d5bff7c676"
+      }
+    }
+  ],
+  "status": "active",
+  "createdAt": {
+    "$date": "2025-03-11T18:47:55.478Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-14T18:36:00.665Z"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "67d472bf0174a748893cd382"
+  },
+  "name": "Sky Shirt",
+  "description": "This is new sky shirt",
+  "price": 200,
+  "discountPrice": 189,
+  "category": {
+    "$oid": "67cddf8f34dd98846323bf82"
+  },
+  "images": [
+    "products/1741976255619.jpg"
+  ],
+  "variants": [
+    {
+      "size": "S",
+      "color": "Green",
+      "stock": 20,
+      "_id": {
+        "$oid": "67d472bf0174a748893cd383"
+      }
+    }
+  ],
+  "status": "inactive",
+  "createdAt": {
+    "$date": "2025-03-14T18:17:35.634Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-15T09:38:37.663Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d54b92920cf3614c227e1f"
+  },
+  "name": "News Year",
+  "description": "This is news years shirt",
+  "price": 23,
+  "discountPrice": 20,
+  "category": {
+    "$oid": "67cddf8f34dd98846323bf82"
+  },
+  "images": [
+    "products/1742031762498.jpg"
+  ],
+  "variants": [
+    {
+      "size": "S",
+      "color": "Yellow",
+      "stock": 20,
+      "_id": {
+        "$oid": "67d54b92920cf3614c227e20"
+      }
+    }
+  ],
+  "status": "active",
+  "createdAt": {
+    "$date": "2025-03-15T09:42:42.514Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-15T09:42:42.514Z"
+  },
+  "__v": 0
+}]
