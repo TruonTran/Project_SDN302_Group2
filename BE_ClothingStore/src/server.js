@@ -6,13 +6,15 @@ const route = require("./routes");
 require("dotenv").config();
 const path = require("path");
 
-const productRoutes = require("./routes/productRoutes");
-const categoryRoutes = require("./routes/categoryRoutes");
-
 const PORT = process.env.PORT || 5000;
 const DATABASE_URL = process.env.DATABASE_URL;
 
 const app = express();
+
+// dùng để gọi đường dẫn
+app.use(express.json());
+// lấy dữ liệu route
+route(app);
 
 // ================= MIDDLEWARE TRƯỚC =================
 app.use(express.json());
@@ -35,13 +37,6 @@ app.use(
   "/uploads/products",
   express.static(path.join(__dirname, "uploads/products"))
 );
-
-// ================= ROUTES =================
-app.use("/api/products", productRoutes);
-app.use("/api/categories", categoryRoutes);
-
-// Nếu có route(app)
-route(app);
 
 // ================= START SERVER =================
 app.listen(PORT, async () => {
