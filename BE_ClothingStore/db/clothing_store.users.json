@@ -1,0 +1,126 @@
+[{
+  "_id": {
+    "$oid": "67c9bbc0a93b56a21c71c65f"
+  },
+  "fullName": "Nguyen Van Giau",
+  "email": "giaunvce170449@fpt.edu.vn",
+  "password": "$2b$10$t0RucSWInlFrhTp8LALNdeGbcnk19TiKxmEqhsUvrkg1TyNyl/OIe",
+  "isAdmin": true,
+  "avatar": "avatars/1741887299223.jpg",
+  "gender": "Male",
+  "phone": "0123456789",
+  "address": "Ninh Kieu Can Tho",
+  "status": "active",
+  "createdAt": {
+    "$date": "2025-03-06T15:14:08.585Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-13T17:34:59.231Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d3273853148c78e247ab84"
+  },
+  "fullName": "Nguyen Thi Quynh Nhu",
+  "email": "nhuntq@gmail.com",
+  "password": "$2b$10$YAlstVI4B69AKy6vGPzvdONJx/QyDRc1SjGRrAn.DdtkfrgUfKwu.",
+  "isAdmin": false,
+  "avatar": "avatars/1741977773324.jpg",
+  "gender": "female",
+  "phone": "0123456789",
+  "address": "21 Le Loi, Can Tho",
+  "status": "active",
+  "createdAt": {
+    "$date": "2025-03-13T18:43:04.527Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-16T17:23:44.627Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d562828cf0d82f92f55437"
+  },
+  "fullName": "Nguyen Van Giau",
+  "email": "giaunguyen17092002@gmail.com",
+  "password": "$2b$10$O1kv1gTPHqEq/KdLKzOou.kITrTPyIJ4XZQ790g2Kehp1KHHvzxue",
+  "isAdmin": false,
+  "avatar": "avatars/1740925263423.jpg",
+  "gender": "male",
+  "phone": "0123456789",
+  "address": "Can Tho",
+  "status": "active",
+  "createdAt": {
+    "$date": "2025-03-15T11:20:34.424Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-15T11:32:14.236Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d70a21b052b3326befbf04"
+  },
+  "fullName": "Nguyen Quoc",
+  "email": "huynq@gmail.com",
+  "password": "$2b$10$YAlstVI4B69AKy6vGPzvdONJx/QyDRc1SjGRrAn.DdtkfrgUfKwu.",
+  "isAdmin": false,
+  "avatar": "avatars/1741977773324.jpg",
+  "gender": "male",
+  "phone": "0123456789",
+  "address": "21 Le Loi, Can Tho",
+  "status": "active",
+  "createdAt": {
+    "$date": "2025-03-13T18:43:04.527Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-16T17:23:44.627Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d70a46b052b3326befbf06"
+  },
+  "fullName": "Nguyen Quynh Ny",
+  "email": "nynq@gmail.com",
+  "password": "$2b$10$YAlstVI4B69AKy6vGPzvdONJx/QyDRc1SjGRrAn.DdtkfrgUfKwu.",
+  "isAdmin": false,
+  "avatar": "avatars/1741977773324.jpg",
+  "gender": "female",
+  "phone": "0123456789",
+  "address": "21 Le Loi, Can Tho",
+  "status": "active",
+  "createdAt": {
+    "$date": "2025-03-13T18:43:04.527Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-16T17:23:44.627Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d70a65b052b3326befbf08"
+  },
+  "fullName": "Admin",
+  "email": "unistyleadmin@gmail.com",
+  "password": "$2b$10$YAlstVI4B69AKy6vGPzvdONJx/QyDRc1SjGRrAn.DdtkfrgUfKwu.",
+  "isAdmin": true,
+  "avatar": "avatars/1741977773324.jpg",
+  "gender": "male",
+  "phone": "0123456789",
+  "address": "21 Le Loi, Can Tho",
+  "status": "active",
+  "createdAt": {
+    "$date": "2025-03-13T18:43:04.527Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-16T17:23:44.627Z"
+  },
+  "__v": 0
+}]
