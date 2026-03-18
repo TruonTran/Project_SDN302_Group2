@@ -54,7 +54,7 @@ exports.deleteCategory = async (req, res) => {
   }
 };
 
-
+// Update status Category
 exports.updateCategoryStatus = async (req, res) => {
   try {
     const { status } = req.body;

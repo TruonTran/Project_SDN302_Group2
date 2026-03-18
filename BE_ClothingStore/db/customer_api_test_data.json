@@ -1,0 +1,80 @@
+{
+  "baseUrl": "http://localhost:5000/api",
+  "user": {
+    "userId": "67d3273853148c78e247ab84",
+    "email": "nhuntq@gmail.com",
+    "passwordNote": "Điền đúng mật khẩu của tài khoản test"
+  },
+  "products": [
+    {
+      "productId": "67cde24b34dd98846323bfaa",
+      "name": "Elegant Evening Dress",
+      "variant": {
+        "variantId": "67cde24b34dd98846323bfab",
+        "size": "S",
+        "color": "Red"
+      }
+    },
+    {
+      "productId": "67cde34a34dd98846323bfb2",
+      "name": "Pullover Hoodie",
+      "variant": {
+        "variantId": "67cde34a34dd98846323bfb4",
+        "size": "M",
+        "color": "Black"
+      }
+    }
+  ],
+  "payloadSamples": {
+    "addToCart": {
+      "items": {
+        "productId": "67cde24b34dd98846323bfaa",
+        "variants": {
+          "size": "S",
+          "color": "Red",
+          "quantity": 2
+        }
+      }
+    },
+    "updateCart": {
+      "productId": "67cde24b34dd98846323bfaa",
+      "variantId": "<variant_subdoc_id_trong_cart>",
+      "quantity": 3
+    },
+    "createOrder": {
+      "userId": "67d3273853148c78e247ab84",
+      "items": [
+        {
+          "productId": "67cde24b34dd98846323bfaa",
+          "variant": {
+            "size": "S",
+            "color": "Red",
+            "quantity": 1
+          }
+        },
+        {
+          "productId": "67cde34a34dd98846323bfb2",
+          "variant": {
+            "size": "M",
+            "color": "Black",
+            "quantity": 1
+          }
+        }
+      ],
+      "shippingAddress": "21 Le Loi, Can Tho",
+      "note": "Giao giờ hành chính",
+      "shippingCost": 6
+    },
+    "checkout": {
+      "shippingAddress": "21 Le Loi, Can Tho",
+      "note": "Call before delivery",
+      "shippingCost": 6,
+      "selectedItems": [
+        {
+          "productId": "67cde24b34dd98846323bfaa",
+          "variantId": "<variant_subdoc_id_trong_cart>"
+        }
+      ]
+    }
+  }
+}
