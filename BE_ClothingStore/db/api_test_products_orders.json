@@ -1,0 +1,363 @@
+{
+  "_comment": "Test API Product + Admin search orders. baseUrl đổi nếu PORT khác. Lấy token: POST /api/auth/login (admin: isAdmin true). Nhét vào headers Authorization: Bearer <accessToken>",
+  "baseUrl": "http://localhost:8000",
+  "variables": {
+    "categoryId_sample": "67cddf7234dd98846323bf7f",
+    "productId_active": "67cde24b34dd98846323bfaa",
+    "productId_inactive": "67cde13534dd98846323bf97",
+    "userId_sample": "67d3273853148c78e247ab84",
+    "ACCESS_TOKEN_ADMIN": "<điền sau khi login admin>",
+    "ACCESS_TOKEN_CUSTOMER": "<điền sau khi login customer>"
+  },
+  "tests": [
+    {
+      "id": "P01_OK",
+      "mô_tả": "Guest — danh sách sản phẩm (chỉ active), phân trang",
+      "method": "GET",
+      "path": "/api/products?page=1&limit=5",
+      "headers": {},
+      "body": null,
+      "kỳ_vọng": {
+        "status": 200,
+        "success": true,
+        "ghi_chú": "data.products mỗi item status phải là active"
+      }
+    },
+    {
+      "id": "P02_OK",
+      "mô_tả": "Admin — lọc theo status=draft hoặc inactive (gửi Bearer admin)",
+      "method": "GET",
+      "path": "/api/products?page=1&limit=10&status=inactive",
+      "headers": {
+        "Authorization": "Bearer {{ACCESS_TOKEN_ADMIN}}"
+      },
+      "body": null,
+      "kỳ_vọng": {
+        "status": 200,
+        "success": true,
+        "ghi_chú": "Trả cả sản phẩm inactive nếu DB có"
+      }
+    },
+    {
+      "id": "P03_OK",
+      "mô_tả": "Chi tiết sản phẩm active — không cần token",
+      "method": "GET",
+      "path": "/api/products/67cde24b34dd98846323bfaa",
+      "headers": {},
+      "body": null,
+      "kỳ_vọng": {
+        "status": 200,
+        "success": true,
+        "ghi_chú": "data.product tồn tại"
+      }
+    },
+    {
+      "id": "P04_FAIL",
+      "mô_tả": "Chi tiết sản phẩm inactive — guest phải 404",
+      "method": "GET",
+      "path": "/api/products/67cde13534dd98846323bf97",
+      "headers": {},
+      "body": null,
+      "kỳ_vọng": {
+        "status": 404,
+        "success": false,
+        "ghi_chú": "Guest/Customer không được xem inactive"
+      }
+    },
+    {
+      "id": "P05_OK",
+      "mô_tả": "Admin xem chi tiết sản phẩm inactive",
+      "method": "GET",
+      "path": "/api/products/67cde13534dd98846323bf97",
+      "headers": {
+        "Authorization": "Bearer {{ACCESS_TOKEN_ADMIN}}"
+      },
+      "body": null,
+      "kỳ_vọng": {
+        "status": 200,
+        "success": true,
+        "ghi_chú": "Admin vẫn thấy product inactive"
+      }
+    },
+    {
+      "id": "P06_FAIL",
+      "mô_tả": "Tạo sản phẩm không token — 401",
+      "method": "POST",
+      "path": "/api/products",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "name": "Test",
+        "description": "x",
+        "price": 99,
+        "category": "67cddf7234dd98846323bf7f",
+        "variants": [{ "size": "M", "color": "Black", "stock": 10 }]
+      },
+      "kỳ_vọng": {
+        "status": 401,
+        "success": false,
+        "ghi_chú": "Thiếu Bearer"
+      }
+    },
+    {
+      "id": "P07_FAIL",
+      "mô_tả": "Tạo sản phẩm bằng customer — 403",
+      "method": "POST",
+      "path": "/api/products",
+      "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer {{ACCESS_TOKEN_CUSTOMER}}"
+      },
+      "body": {
+        "name": "Hack",
+        "description": "x",
+        "price": 1,
+        "category": "67cddf7234dd98846323bf7f",
+        "variants": [{ "size": "S", "color": "Red", "stock": 1 }]
+      },
+      "kỳ_vọng": {
+        "status": 403,
+        "success": false,
+        "ghi_chú": "Không phải admin"
+      }
+    },
+    {
+      "id": "P08_FAIL",
+      "mô_tả": "Tạo sản phẩm — thiếu variants — 400",
+      "method": "POST",
+      "path": "/api/products",
+      "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer {{ACCESS_TOKEN_ADMIN}}"
+      },
+      "body": {
+        "name": "No variants",
+        "description": "bad",
+        "price": 10,
+        "category": "67cddf7234dd98846323bf7f",
+        "variants": []
+      },
+      "kỳ_vọng": {
+        "status": 400,
+        "success": false,
+        "ghi_chú": "Validate: cần ít nhất 1 variant"
+      }
+    },
+    {
+      "id": "P09_OK",
+      "mô_tả": "Admin tạo sản phẩm hợp lệ — 201",
+      "method": "POST",
+      "path": "/api/products",
+      "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer {{ACCESS_TOKEN_ADMIN}}"
+      },
+      "body": {
+        "name": "API Test Product",
+        "description": "Tạo từ file test JSON",
+        "price": 199000,
+        "discountPrice": 0,
+        "category": "67cddf7234dd98846323bf7f",
+        "images": [],
+        "variants": [
+          { "size": "M", "color": "Navy", "stock": 5 },
+          { "size": "L", "color": "Navy", "stock": 3 }
+        ],
+        "status": "draft"
+      },
+      "kỳ_vọng": {
+        "status": 201,
+        "success": true,
+        "ghi_chú": "Lưu _id trả về để test PUT/PATCH/DELETE sau"
+      }
+    },
+    {
+      "id": "P10_OK",
+      "mô_tả": "Admin PATCH status active (thay :id bằng id vừa tạo ở P09)",
+      "method": "PATCH",
+      "path": "/api/products/<PRODUCT_ID_TU_P09>/status",
+      "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer {{ACCESS_TOKEN_ADMIN}}"
+      },
+      "body": {
+        "status": "active"
+      },
+      "kỳ_vọng": {
+        "status": 200,
+        "success": true,
+        "ghi_chú": "data.product.status === active"
+      }
+    },
+    {
+      "id": "P11_FAIL",
+      "mô_tả": "PATCH status sai enum — 400",
+      "method": "PATCH",
+      "path": "/api/products/67cde24b34dd98846323bfaa/status",
+      "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer {{ACCESS_TOKEN_ADMIN}}"
+      },
+      "body": {
+        "status": "deleted"
+      },
+      "kỳ_vọng": {
+        "status": 400,
+        "success": false,
+        "ghi_chú": "Chỉ active|inactive|draft"
+      }
+    },
+    {
+      "id": "P12_OK",
+      "mô_tả": "Admin PUT sửa tên/giá (thay :id)",
+      "method": "PUT",
+      "path": "/api/products/<PRODUCT_ID_TU_P09>",
+      "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer {{ACCESS_TOKEN_ADMIN}}"
+      },
+      "body": {
+        "name": "API Test Product (đã sửa)",
+        "description": "Mô tả cập nhật",
+        "price": 189000,
+        "discountPrice": 0,
+        "category": "67cddf7234dd98846323bf7f",
+        "variants": [{ "size": "M", "color": "Navy", "stock": 4 }]
+      },
+      "kỳ_vọng": {
+        "status": 200,
+        "success": true,
+        "ghi_chú": "Giữ đủ field bắt buộc schema khi update"
+      }
+    },
+    {
+      "id": "P13_OK",
+      "mô_tả": "Admin DELETE sản phẩm test (thay :id)",
+      "method": "DELETE",
+      "path": "/api/products/<PRODUCT_ID_TU_P09>",
+      "headers": {
+        "Authorization": "Bearer {{ACCESS_TOKEN_ADMIN}}"
+      },
+      "body": null,
+      "kỳ_vọng": {
+        "status": 200,
+        "success": true,
+        "ghi_chú": "Xóa cứng — không gọi lại GET cùng id"
+      }
+    },
+    {
+      "id": "O01_FAIL",
+      "mô_tả": "Tìm đơn admin không token — 401",
+      "method": "GET",
+      "path": "/api/orders/admin/search?page=1&limit=5",
+      "headers": {},
+      "body": null,
+      "kỳ_vọng": {
+        "status": 401,
+        "success": false,
+        "ghi_chú": "Bắt buộc Bearer"
+      }
+    },
+    {
+      "id": "O02_FAIL",
+      "mô_tả": "Tìm đơn bằng customer token — 403",
+      "method": "GET",
+      "path": "/api/orders/admin/search?keyword=Le Loi",
+      "headers": {
+        "Authorization": "Bearer {{ACCESS_TOKEN_CUSTOMER}}"
+      },
+      "body": null,
+      "kỳ_vọng": {
+        "status": 403,
+        "success": false,
+        "ghi_chú": "Chỉ admin"
+      }
+    },
+    {
+      "id": "O03_OK",
+      "mô_tả": "Admin tìm đơn theo keyword địa chỉ/ghi chú + phân trang",
+      "method": "GET",
+      "path": "/api/orders/admin/search?keyword=Can&page=1&limit=10",
+      "headers": {
+        "Authorization": "Bearer {{ACCESS_TOKEN_ADMIN}}"
+      },
+      "body": null,
+      "kỳ_vọng": {
+        "status": 200,
+        "success": true,
+        "ghi_chú": "data.orders + data.pagination"
+      }
+    },
+    {
+      "id": "O04_OK",
+      "mô_tả": "Admin lọc status + userId (đổi userId theo DB thật)",
+      "method": "GET",
+      "path": "/api/orders/admin/search?status=pending&userId=67d3273853148c78e247ab84&page=1&limit=5",
+      "headers": {
+        "Authorization": "Bearer {{ACCESS_TOKEN_ADMIN}}"
+      },
+      "body": null,
+      "kỳ_vọng": {
+        "status": 200,
+        "success": true,
+        "ghi_chú": "Chỉ đơn pending của user đó"
+      }
+    },
+    {
+      "id": "O05_OK",
+      "mô_tả": "Admin lọc theo khoảng ngày createdAt",
+      "method": "GET",
+      "path": "/api/orders/admin/search?from=2025-01-01&to=2026-12-31&page=1&limit=20",
+      "headers": {
+        "Authorization": "Bearer {{ACCESS_TOKEN_ADMIN}}"
+      },
+      "body": null,
+      "kỳ_vọng": {
+        "status": 200,
+        "success": true,
+        "ghi_chú": "Đơn trong khoảng thời gian"
+      }
+    },
+    {
+      "id": "O06_FAIL",
+      "mô_tả": "status query sai enum — 400",
+      "method": "GET",
+      "path": "/api/orders/admin/search?status=shipped",
+      "headers": {
+        "Authorization": "Bearer {{ACCESS_TOKEN_ADMIN}}"
+      },
+      "body": null,
+      "kỳ_vọng": {
+        "status": 400,
+        "success": false,
+        "ghi_chú": "pending|in_progress|done|cancelled"
+      }
+    },
+    {
+      "id": "O07_OK",
+      "mô_tả": "Tìm đúng 1 đơn theo orderId (Mongo _id)",
+      "method": "GET",
+      "path": "/api/orders/admin/search?orderId=<MOT_ORDER_ID_TRONG_DB>",
+      "headers": {
+        "Authorization": "Bearer {{ACCESS_TOKEN_ADMIN}}"
+      },
+      "body": null,
+      "kỳ_vọng": {
+        "status": 200,
+        "success": true,
+        "ghi_chú": "data.orders length 0 hoặc 1"
+      }
+    }
+  ],
+  "login_mẫu": {
+    "POST /api/auth/login": {
+      "headers": { "Content-Type": "application/json" },
+      "body": {
+        "email": "email_admin_trong_DB",
+        "password": "mat_khau"
+      },
+      "response": "Lấy data.accessToken → dán vào ACCESS_TOKEN_ADMIN"
+    }
+  }
+}

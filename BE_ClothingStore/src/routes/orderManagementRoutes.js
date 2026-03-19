@@ -3,6 +3,7 @@ const router = express.Router();
 const { verifyToken, adminMiddleware } = require("../middleware/authMiddleware");
 const {
     adminGetAllOrders,
+    adminSearchOrders,
     getOrderList,
     getOrderDetail,
     adminUpdateOrderStatus,
@@ -23,6 +24,69 @@ const {
  *         description: Admin only
  */
 router.get("/admin", verifyToken, adminMiddleware, adminGetAllOrders);
+
+/**
+ * @swagger
+ * /api/orders/admin/search:
+ *   get:
+ *     tags: [Orders]
+ *     summary: Tìm kiếm đơn hàng (Admin)
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: orderId
+ *         schema:
+ *           type: string
+ *         description: Mongo _id của order
+ *       - in: query
+ *         name: status
+ *         schema:
+ *           type: string
+ *           enum: [pending, in_progress, done, cancelled]
+ *       - in: query
+ *         name: userId
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: from
+ *         schema:
+ *           type: string
+ *         description: ISO date (example 2025-01-01)
+ *       - in: query
+ *         name: to
+ *         schema:
+ *           type: string
+ *         description: ISO date
+ *       - in: query
+ *         name: keyword
+ *         schema:
+ *           type: string
+ *         description: Tìm theo shippingAddress hoặc note
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           example: 1
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           example: 10
+ *     responses:
+ *       200:
+ *         description: OK
+ *       400:
+ *         description: Tham số không hợp lệ
+ *       403:
+ *         description: Admin only
+ */
+router.get(
+  "/admin/search",
+  verifyToken,
+  adminMiddleware,
+  adminSearchOrders
+);
 
 /**
  * @swagger
