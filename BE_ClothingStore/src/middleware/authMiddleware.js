@@ -69,4 +69,27 @@ const canModifyUser = (req, res, next) => {
   });
 };
 
-module.exports = { verifyToken, adminMiddleware, canModifyUser };
+/** Có token hợp lệ thì gắn req.user; không có / lỗi token thì vẫn next (dùng cho GET public + phân quyền mềm). */
+const optionalVerifyToken = async (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return next();
+  }
+  try {
+    const token = authHeader.split(" ")[1];
+    if (!token) return next();
+    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+    const user = await User.findById(decoded._id);
+    if (user) req.user = user;
+  } catch {
+    /* coi như guest */
+  }
+  next();
+};
+
+module.exports = {
+  verifyToken,
+  adminMiddleware,
+  canModifyUser,
+  optionalVerifyToken,
+};
