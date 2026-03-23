@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const OTP = require("../models/otpModel");
-const { validateEmail } = require("../utils/validation");
+const { validateEmail, validatePassword  } = require("../utils/validation");
 
 const generateAccessToken = (user) => {
   return jwt.sign(
@@ -39,6 +39,13 @@ const register = async (req, res) => {
         message: "Invalid email address",
       });
     }
+    if (!validatePassword(password)) {
+  return res.status(400).json({
+    success: false,
+    message:
+      "Password must be at least 6 characters and include uppercase, lowercase and number",
+  });
+}
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -311,6 +318,21 @@ const resetPasswordWithOTP = async (req, res) => {
   try {
     const { email, otp, newPassword } = req.body;
 
+    if (!newPassword) {
+      return res.status(400).json({
+        success: false,
+        message: "New password is required",
+      });
+    }
+
+    if (!validatePassword(newPassword)) {
+      return res.status(400).json({
+        success: false,
+        message:
+          "Password must be at least 6 characters and include uppercase, lowercase and number",
+      });
+    }
+
     const storedOTP = await OTP.findOne({ email, otp });
     if (!storedOTP || storedOTP.expiresAt < Date.now()) {
       return res
@@ -322,6 +344,7 @@ const resetPasswordWithOTP = async (req, res) => {
     await User.findOneAndUpdate({ email }, { password: hashedPassword });
 
     await OTP.deleteOne({ email });
+
     res.json({
       success: true,
       message: "Password has been reset successfully.",
