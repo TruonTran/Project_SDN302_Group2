@@ -34,7 +34,7 @@ const findProductVariant = (product, variantId, size, color) => {
 
 const getCartByUserId = async (req, res) => {
   try {
-    const { userId } = req.params;
+    const userId = req.user._id.toString();
 
     const cart = await getPopulatedCart(userId);
     if (!cart) {
@@ -61,7 +61,7 @@ const getCartByUserId = async (req, res) => {
 
 const addToCart = async (req, res) => {
   try {
-    const { userId } = req.params;
+    const userId = req.user._id.toString();
     const payloadItem = Array.isArray(req.body.items)
       ? req.body.items[0]
       : req.body.items;
@@ -180,7 +180,7 @@ const addToCart = async (req, res) => {
 
 const updateCart = async (req, res) => {
   try {
-    const { userId } = req.params;
+    const userId = req.user._id.toString();
     const { productId, variantId, quantity } = req.body;
 
     if (!productId || !variantId || quantity === undefined) {
@@ -275,7 +275,7 @@ const updateCart = async (req, res) => {
 
 const removeFromCart = async (req, res) => {
   try {
-    const { userId } = req.params;
+    const userId = req.user._id.toString();
     const { productId, variantId } = req.body;
 
     if (!productId || !variantId) {
@@ -330,7 +330,7 @@ const removeFromCart = async (req, res) => {
 
 const clearCart = async (req, res) => {
   try {
-    const { userId } = req.params;
+    const userId = req.user._id.toString();
 
     const cart = await Cart.findOne({ userId });
     if (!cart) {

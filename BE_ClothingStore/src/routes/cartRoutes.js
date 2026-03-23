@@ -7,25 +7,18 @@ const {
   removeFromCart,
   clearCart,
 } = require("../controllers/cartController");
-const { verifyToken, canModifyUser } = require("../middleware/authMiddleware");
+const { verifyToken } = require("../middleware/authMiddleware");
 
 /**
  * @swagger
- * /api/carts/{userId}:
+ * /api/carts:
  *   get:
- *     summary: Lấy giỏ hàng theo ID người dùng
- *     description: Lấy thông tin giỏ hàng của một người dùng cụ thể
+ *     summary: Lấy giỏ hàng của người dùng hiện tại
+ *     description: Lấy thông tin giỏ hàng dựa trên người dùng trong JWT token
  *     tags:
  *       - Giỏ Hàng
  *     security:
  *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: userId
- *         required: true
- *         schema:
- *           type: string
- *         description: ID của người dùng
  *     responses:
  *       200:
  *         description: Lấy giỏ hàng thành công
@@ -60,21 +53,14 @@ const { verifyToken, canModifyUser } = require("../middleware/authMiddleware");
 
 /**
  * @swagger
- * /api/carts/{userId}:
+ * /api/carts:
  *   post:
  *     summary: Thêm sản phẩm vào giỏ
- *     description: Thêm một sản phẩm mới vào giỏ hàng của người dùng
+ *     description: Thêm một sản phẩm mới vào giỏ hàng của người dùng hiện tại từ JWT token
  *     tags:
  *       - Giỏ Hàng
  *     security:
  *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: userId
- *         required: true
- *         schema:
- *           type: string
- *         description: ID của người dùng
  *     requestBody:
  *       required: true
  *       content:
@@ -138,21 +124,14 @@ const { verifyToken, canModifyUser } = require("../middleware/authMiddleware");
 
 /**
  * @swagger
- * /api/carts/{userId}:
+ * /api/carts:
  *   put:
  *     summary: Cập nhật sản phẩm trong giỏ
- *     description: Cập nhật số lượng hoặc thông tin sản phẩm trong giỏ hàng
+ *     description: Cập nhật số lượng hoặc thông tin sản phẩm trong giỏ hàng của người dùng hiện tại
  *     tags:
  *       - Giỏ Hàng
  *     security:
  *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: userId
- *         required: true
- *         schema:
- *           type: string
- *         description: ID của người dùng
  *     requestBody:
  *       required: true
  *       content:
@@ -200,21 +179,14 @@ const { verifyToken, canModifyUser } = require("../middleware/authMiddleware");
 
 /**
  * @swagger
- * /api/carts/{userId}:
+ * /api/carts:
  *   delete:
  *     summary: Xóa sản phẩm khỏi giỏ
- *     description: Xóa một sản phẩm cụ thể khỏi giỏ hàng của người dùng
+ *     description: Xóa một sản phẩm cụ thể khỏi giỏ hàng của người dùng hiện tại
  *     tags:
  *       - Giỏ Hàng
  *     security:
  *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: userId
- *         required: true
- *         schema:
- *           type: string
- *         description: ID của người dùng
  *     requestBody:
  *       required: true
  *       content:
@@ -255,21 +227,14 @@ const { verifyToken, canModifyUser } = require("../middleware/authMiddleware");
 
 /**
  * @swagger
- * /api/carts/clear/{userId}:
+ * /api/carts/clear:
  *   delete:
  *     summary: Xóa toàn bộ giỏ hàng
- *     description: Xóa tất cả các sản phẩm khỏi giỏ hàng của người dùng
+ *     description: Xóa tất cả các sản phẩm khỏi giỏ hàng của người dùng hiện tại
  *     tags:
  *       - Giỏ Hàng
  *     security:
  *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: userId
- *         required: true
- *         schema:
- *           type: string
- *         description: ID của người dùng
  *     responses:
  *       200:
  *         description: Xóa toàn bộ giỏ hàng thành công
@@ -290,10 +255,10 @@ const { verifyToken, canModifyUser } = require("../middleware/authMiddleware");
  *         description: Lỗi khi xóa giỏ hàng
  */
 
-router.get("/:userId", verifyToken, canModifyUser, getCartByUserId);
-router.post("/:userId", verifyToken, canModifyUser, addToCart);
-router.put("/:userId", verifyToken, canModifyUser, updateCart);
-router.delete("/:userId", verifyToken, canModifyUser, removeFromCart);
-router.delete("/clear/:userId", verifyToken, canModifyUser, clearCart);
+router.get("/", verifyToken, getCartByUserId);
+router.post("/", verifyToken, addToCart);
+router.put("/", verifyToken, updateCart);
+router.delete("/", verifyToken, removeFromCart);
+router.delete("/clear", verifyToken, clearCart);
 
 module.exports = router;
