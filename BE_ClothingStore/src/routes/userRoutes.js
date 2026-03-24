@@ -23,7 +23,7 @@ const {
 
 /**
  * @swagger
- * /users:
+ * /api/users:
  *   get:
  *     summary: Get all users (Admin only)
  *     tags: [Users]
@@ -47,7 +47,7 @@ router.get("/", verifyToken, adminMiddleware, getAllUsers);
 
 /**
  * @swagger
- * /users/{userId}:
+ * /api/users/{userId}:
  *   get:
  *     summary: Get user by ID
  *     tags: [Users]
@@ -70,7 +70,7 @@ router.get("/:userId", verifyToken, canModifyUser, getUserById);
 
 /**
  * @swagger
- * /users/{userId}:
+ * /api/users/{userId}:
  *   put:
  *     summary: Update user information
  *     tags: [Users]
@@ -117,7 +117,7 @@ router.put(
 
 /**
  * @swagger
- * /users/{userId}/status:
+ * /api/users/{userId}/status:
  *   put:
  *     summary: Update user status (active/inactive)
  *     tags: [Users]
@@ -157,7 +157,7 @@ router.put("/:userId/status", verifyToken, canModifyUser, updateStatusUser);
 
 /**
  * @swagger
- * /users/{userId}/change-password:
+ * /api/users/{userId}/change-password:
  *   put:
  *     summary: Change user password
  *     tags: [Users]

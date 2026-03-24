@@ -1,6 +1,7 @@
 # 🛍️ High Clothing Store
 
-High Clothing Store là website bán quần áo gồm 
+High Clothing Store là website bán quần áo gồm
+
 - **Backend:** NodeJS + Express
 - **Database:** MongoDB
 
@@ -59,6 +60,7 @@ http://localhost:8000
 
 1. Khởi động MongoDB
 2. Chạy Backend (port 8000)
+
 ---
 
 # ⚠️ Lưu ý
@@ -70,15 +72,17 @@ http://localhost:8000
 ---
 
 # 👨‍💻 Tác giả
-- Group 2 _SDN302
-- Nguyễn Tấn 
+
+- Group 2 \_SDN302
+- Nguyễn Tấn
 - Lê Văn Nguyễn
 - Trương Ngọc Trân
 - Quách Khánh Duy
 - Thành An
 
+# github
 
-# github 
+```bash
 Cập nhật danh sách nhánh
 git fetch --all
  chuyển nhánh
@@ -87,3 +91,4 @@ git switch -c profileManagement origin/profileManagement
 git branch
  Oke rồi thì kéo code về bằng lệnh
 git pull
+```

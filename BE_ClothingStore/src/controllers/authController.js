@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const OTP = require("../models/otpModel");
-const { validateEmail, validatePassword  } = require("../utils/validation");
+const { validateEmail, validatePassword, validatePhone } = require("../utils/validation");
 
 const generateAccessToken = (user) => {
   return jwt.sign(
@@ -40,12 +40,19 @@ const register = async (req, res) => {
       });
     }
     if (!validatePassword(password)) {
-  return res.status(400).json({
-    success: false,
-    message:
-      "Password must be at least 6 characters and include uppercase, lowercase and number",
-  });
-}
+      return res.status(400).json({
+        success: false,
+        message:
+          "Password must be at least 6 characters and include uppercase, lowercase and number",
+      });
+    }
+    if (!validatePhone(phone)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid phone number",
+      });
+    }
+
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {

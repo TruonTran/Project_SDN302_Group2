@@ -169,7 +169,7 @@ router.put("/:id", verifyToken, adminMiddleware, categoryController.updateCatego
  * @swagger
  * /api/categories/{id}:
  *   delete:
- *     summary: Delete category
+ *     summary: Delete category by admin
  *     tags: [Categories]
  *     security:
  *       - bearerAuth: []
@@ -198,7 +198,7 @@ router.delete("/:id", verifyToken, adminMiddleware, categoryController.deleteCat
  * @swagger
  * /api/categories/{id}/status:
  *   put:
- *     summary: Update category status
+ *     summary: Update category status by admin
  *     tags: [Categories]
  *     security:
  *       - bearerAuth: []

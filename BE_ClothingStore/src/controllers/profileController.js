@@ -6,14 +6,14 @@ const { validatePassword } = require("../utils/validation");
 
 // GET /api/profile
 const getProfile = async (req, res) => {
-    try {
-        const user = await User.findById(req.user._id).select("-password -resetPasswordToken -resetPasswordExpires");
-        if (!user) return res.status(404).json({ success: false, message: "User not found" });
+  try {
+    const user = await User.findById(req.user._id).select("-password -resetPasswordToken -resetPasswordExpires");
+    if (!user) return res.status(404).json({ success: false, message: "User not found" });
 
-        res.status(200).json({ success: true, message: "Profile retrieved successfully", data: user });
-    } catch (error) {
-        res.status(500).json({ success: false, message: "Internal Server Error", error: error.message });
-    }
+    res.status(200).json({ success: true, message: "Profile retrieved successfully", data: user });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Internal Server Error", error: error.message });
+  }
 };
 
 // PUT /api/profile
@@ -198,54 +198,54 @@ const updateProfile = async (req, res) => {
 
 // PUT /api/profile/avatar
 const updateAvatar = async (req, res) => {
-    try {
-        if (!req.file)
-            return res.status(400).json({ success: false, message: "No avatar file uploaded" });
+  try {
+    if (!req.file)
+      return res.status(400).json({ success: false, message: "No avatar file uploaded" });
 
-        const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
-        if (!allowedTypes.includes(req.file.mimetype)) {
-            fs.unlinkSync(req.file.path);
-            return res.status(400).json({ success: false, message: "Only .jpeg, .jpg, .png files are allowed" });
-        }
-
-        const currentUser = await User.findById(req.user._id);
-        if (currentUser?.avatar) {
-            const oldPath = path.join(__dirname, "..", "uploads", "avatars", currentUser.avatar.replace("avatars/", ""));
-            if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
-        }
-
-        const updated = await User.findByIdAndUpdate(
-            req.user._id,
-            { $set: { avatar: `avatars/${req.file.filename}` } },
-            { new: true }
-        ).select("-password -resetPasswordToken -resetPasswordExpires");
-
-        res.status(200).json({ success: true, message: "Avatar updated successfully", data: updated });
-    } catch (error) {
-        res.status(500).json({ success: false, message: "Failed to update avatar", error: error.message });
+    const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
+    if (!allowedTypes.includes(req.file.mimetype)) {
+      fs.unlinkSync(req.file.path);
+      return res.status(400).json({ success: false, message: "Only .jpeg, .jpg, .png files are allowed" });
     }
+
+    const currentUser = await User.findById(req.user._id);
+    if (currentUser?.avatar) {
+      const oldPath = path.join(__dirname, "..", "uploads", "avatars", currentUser.avatar.replace("avatars/", ""));
+      if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
+    }
+
+    const updated = await User.findByIdAndUpdate(
+      req.user._id,
+      { $set: { avatar: `avatars/${req.file.filename}` } },
+      { new: true }
+    ).select("-password -resetPasswordToken -resetPasswordExpires");
+
+    res.status(200).json({ success: true, message: "Avatar updated successfully", data: updated });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Failed to update avatar", error: error.message });
+  }
 };
 
 // DELETE /api/profile/avatar
 const deleteAvatar = async (req, res) => {
-    try {
-        const user = await User.findById(req.user._id);
-        if (!user) return res.status(404).json({ success: false, message: "User not found" });
-        if (!user.avatar) return res.status(400).json({ success: false, message: "No avatar to delete" });
+  try {
+    const user = await User.findById(req.user._id);
+    if (!user) return res.status(404).json({ success: false, message: "User not found" });
+    if (!user.avatar) return res.status(400).json({ success: false, message: "No avatar to delete" });
 
-        const oldPath = path.join(__dirname, "..", "uploads", "avatars", user.avatar.replace("avatars/", ""));
-        if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
+    const oldPath = path.join(__dirname, "..", "uploads", "avatars", user.avatar.replace("avatars/", ""));
+    if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
 
-        const updated = await User.findByIdAndUpdate(
-            req.user._id,
-            { $unset: { avatar: "" } },
-            { new: true }
-        ).select("-password -resetPasswordToken -resetPasswordExpires");
+    const updated = await User.findByIdAndUpdate(
+      req.user._id,
+      { $unset: { avatar: "" } },
+      { new: true }
+    ).select("-password -resetPasswordToken -resetPasswordExpires");
 
-        res.status(200).json({ success: true, message: "Avatar deleted successfully", data: updated });
-    } catch (error) {
-        res.status(500).json({ success: false, message: "Failed to delete avatar", error: error.message });
-    }
+    res.status(200).json({ success: true, message: "Avatar deleted successfully", data: updated });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Failed to delete avatar", error: error.message });
+  }
 };
 
 // PUT /api/profile/change-password
@@ -253,7 +253,7 @@ const changePassword = async (req, res) => {
   try {
     const { oldPassword, newPassword, confirmPassword } = req.body;
 
-    // 1️⃣ Check required fields
+    // Check required fields
     if (!oldPassword || !newPassword || !confirmPassword) {
       return res.status(400).json({
         success: false,
@@ -261,7 +261,7 @@ const changePassword = async (req, res) => {
       });
     }
 
-    // 2️⃣ Validate password strength
+    // Validate password strength
     if (!validatePassword(newPassword)) {
       return res.status(400).json({
         success: false,
@@ -270,7 +270,7 @@ const changePassword = async (req, res) => {
       });
     }
 
-    // 3️⃣ Check confirm password
+    // Check confirm password
     if (newPassword !== confirmPassword) {
       return res.status(400).json({
         success: false,
@@ -278,7 +278,7 @@ const changePassword = async (req, res) => {
       });
     }
 
-    // 4️⃣ Find user
+    // Find user
     const user = await User.findById(req.user._id);
     if (!user) {
       return res.status(404).json({
@@ -287,7 +287,7 @@ const changePassword = async (req, res) => {
       });
     }
 
-    // 5️⃣ Check old password
+    // Check old password
     const isMatch = await bcrypt.compare(oldPassword, user.password);
     if (!isMatch) {
       return res.status(400).json({
@@ -296,7 +296,7 @@ const changePassword = async (req, res) => {
       });
     }
 
-    // 6️⃣ Check new password different from old
+    // Check new password different from old
     const isSame = await bcrypt.compare(newPassword, user.password);
     if (isSame) {
       return res.status(400).json({
@@ -305,7 +305,7 @@ const changePassword = async (req, res) => {
       });
     }
 
-    // 7️⃣ Hash & save
+    // Hash & save
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(newPassword, salt);
     await user.save();
